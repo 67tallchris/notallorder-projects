@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — No Tall Order</title>
+<meta name="description" content="Tools Chris Porter has built — digital ecology, home page copy builder, messaging diagnostics, and more — plus the consulting engagements they've powered.">
+<link rel="canonical" href="https://projects.notallorder.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="No Tall Order">
+<meta property="og:title" content="Projects — No Tall Order">
+<meta property="og:description" content="Tools I've built, and the client work they've powered.">
+<meta property="og:url" content="https://projects.notallorder.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;700;900&family=Aleo:wght@400;700&display=swap">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Red Hat Display", sans-serif; background: #f5f4f1; }
+
+::selection { background: #004B8C; color: #fff; }
+:focus-visible { outline: 2px solid #004B8C; outline-offset: 3px; border-radius: 4px; }
+@view-transition { navigation: auto; }
+html { scroll-behavior: smooth; }
+
+/* ── Shared scroll-reveal states (applied by JS only) ── */
+.fx-pre { opacity: 0; transform: translateY(20px); }
+.fx-in {
+  opacity: 1; transform: none;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--fx-delay, 0s);
+}
+
+/* ── Nav ── */
+nav {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 11px 2.5rem; background: #fff;
+  border-bottom: 1px solid #dddbd4;
+}
+.logo { text-decoration: none; display: flex; align-items: center; gap: 8px; }
+.logo-word {
+  font-size: 19px; font-weight: 900; letter-spacing: -0.3px; color: #272E33;
+}
+.logo-word em { font-style: normal; color: #004B8C; }
+.logo-sep { color: #dddbd4; font-weight: 400; }
+.logo-sub { font-size: 14px; font-weight: 500; color: #848789; letter-spacing: 0.03em; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 15px; color: #848789; text-decoration: none; font-weight: 500; letter-spacing: 0.03em;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover { color: #272E33; }
+.nav-links a.active { color: #004B8C; }
+.nav-cta {
+  background: #004B8C; color: #fff; font-size: 15px; font-weight: 700;
+  padding: 11px 24px; border-radius: 6px; text-decoration: none; letter-spacing: 0.03em;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.nav-cta:hover {
+  background: #003566; transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 75, 140, 0.25);
+}
+
+/* ── Shared components ── */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #e8eef5; color: #004B8C;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; padding: 6px 14px;
+  border-radius: 100px; margin-bottom: 1.5rem;
+}
+.eyebrow-dot { width: 6px; height: 6px; background: #004B8C; border-radius: 50%; }
+
+.btn-p {
+  background: #004B8C; color: #fff;
+  font-size: 17px; font-weight: 700; padding: 15px 30px;
+  border-radius: 6px; text-decoration: none; display: inline-block;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-p:hover {
+  background: #003566; transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 75, 140, 0.25);
+}
+.btn-s {
+  color: #272E33; font-size: 16px; font-weight: 500;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+  transition: color 0.2s ease;
+}
+.btn-s:hover { color: #004B8C; }
+.btn-s .arr { color: #004B8C; font-size: 21px; transition: transform 0.2s ease; }
+.btn-s:hover .arr { transform: translateX(4px); }
+
+/* ── Page header ── */
+.page-header {
+  background: #fff; border-bottom: 1px solid #dddbd4;
+  padding: 6rem 2.5rem 5rem;
+}
+.page-header-inner { max-width: 1100px; margin: 0 auto; }
+.page-header h1 {
+  font-size: clamp(32px, 5.5vw, 46px); font-weight: 700; line-height: 1.12;
+  letter-spacing: -0.5px; color: #272E33; margin-bottom: 1.5rem; max-width: 720px;
+}
+.page-header h1 em { font-style: normal; color: #004B8C; }
+.page-header .sub {
+  font-family: "Aleo", serif; font-size: 20px;
+  line-height: 1.8; color: #848789; max-width: 620px;
+}
+
+/* ── Section wrapper ── */
+.section {
+  max-width: 1100px; margin: 0 auto;
+  padding: 6rem 2.5rem;
+}
+.section-heading {
+  font-size: 28px; font-weight: 700; color: #272E33;
+  margin-bottom: 0.75rem; letter-spacing: -0.3px;
+}
+.section-lead {
+  font-family: "Aleo", serif; font-size: 17px; line-height: 1.8;
+  color: #848789; max-width: 620px; margin-bottom: 3rem;
+}
+
+/* ── Project cards ── */
+.project-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+}
+.project-card {
+  background: #fff; border: 1px solid #dddbd4; border-radius: 12px;
+  padding: 2rem; display: flex; flex-direction: column; gap: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+  border-color: #c9c6bd;
+}
+.project-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.project-title { font-size: 21px; font-weight: 700; color: #272E33; letter-spacing: -0.3px; }
+.project-title a { color: #272E33; text-decoration: none; transition: color 0.2s ease; }
+.project-title a:hover { color: #004B8C; }
+.project-badge {
+  flex-shrink: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 5px 11px; border-radius: 100px;
+  background: #e8eef5; color: #004B8C;
+}
+.project-badge--live { background: #e7f2e5; color: #2f7a2f; }
+.project-badge--wip { background: #fdf0e0; color: #b45309; }
+.project-desc {
+  font-family: "Aleo", serif; font-size: 15px; line-height: 1.7; color: #55595e;
+}
+.project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+.stack-chip {
+  font-size: 12px; font-weight: 500; color: #848789;
+  background: #f5f4f1; border: 1px solid #dddbd4; border-radius: 100px;
+  padding: 3px 10px;
+}
+.project-links {
+  margin-top: auto; padding-top: 0.5rem;
+  display: flex; gap: 1.5rem; border-top: 1px solid #f0eeea;
+}
+.project-links a {
+  font-size: 14px; font-weight: 700; color: #004B8C; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 5px;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+.project-links a:hover { gap: 9px; color: #003566; }
+
+/* ── Two-col client cards ── */
+.client-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.client-card {
+  background: #fff; border: 1px solid #dddbd4; border-radius: 12px;
+  padding: 2.25rem 2rem; display: flex; flex-direction: column; gap: 1rem;
+}
+.client-name { font-size: 23px; font-weight: 700; color: #272E33; letter-spacing: -0.4px; }
+.client-desc {
+  font-family: "Aleo", serif; font-size: 15px; line-height: 1.75; color: #55595e;
+}
+.client-desc + .client-desc { padding-top: 0; }
+.client-deliverable {
+  font-size: 13px; font-weight: 500; color: #848789; letter-spacing: 0.02em;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+
+/* ── CTA band ── */
+.cta-band {
+  background: #004B8C; padding: 6.5rem 2.5rem;
+  text-align: center;
+}
+.cta-band h2 {
+  font-size: 36px; font-weight: 700; color: #fff;
+  letter-spacing: -0.3px; margin-bottom: 1rem;
+}
+.cta-band p {
+  font-family: "Aleo", serif; font-size: 20px;
+  color: rgba(255,255,255,0.75); margin-bottom: 2.5rem;
+  max-width: 560px; margin-left: auto; margin-right: auto;
+}
+.cta-band .btn-p { background: #fff; color: #004B8C; }
+.cta-band .btn-p:hover { background: #e8eef5; }
+
+/* ── Entrance animation ── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .page-header-inner > * { animation: fadeUp 0.65s ease both; }
+  .page-header-inner > *:nth-child(2) { animation-delay: 0.08s; }
+  .page-header-inner > *:nth-child(3) { animation-delay: 0.16s; }
+}
+
+/* ── Footer ── */
+footer {
+  background: #fff; border-top: 1px solid #dddbd4;
+  padding: 4.5rem 2.5rem 3rem;
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 2rem; flex-wrap: wrap;
+}
+.footer-brand .logo-word { font-size: 22px; margin-bottom: 0.75rem; }
+.footer-tagline {
+  font-family: "Aleo", serif; font-size: 14px; color: #848789;
+  max-width: 280px; line-height: 1.6;
+}
+.footer-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+.footer-links a {
+  font-size: 14px; color: #848789; text-decoration: none; font-weight: 500;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover { color: #004B8C; }
+.footer-bottom {
+  max-width: 1100px; margin: 2rem auto 0;
+  padding-top: 1.25rem; border-top: 1px solid #dddbd4;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 1rem; flex-wrap: wrap;
+}
+.footer-copy { font-size: 13px; color: #848789; }
+.footer-cta-link {
+  font-size: 14px; font-weight: 700; color: #004B8C; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 5px;
+  transition: gap 0.2s ease;
+}
+.footer-cta-link:hover { gap: 9px; }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .project-grid, .client-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  nav { flex-wrap: wrap; padding: 10px 1.25rem; row-gap: 4px; }
+  .nav-links {
+    order: 3; width: 100%; justify-content: center;
+    gap: 1.25rem; padding: 8px 0 4px;
+  }
+  .nav-links a { font-size: 14px; }
+  .nav-cta { font-size: 13px; padding: 9px 16px; }
+  .page-header { padding: 3rem 1.25rem 2.5rem; }
+  .section { padding: 2.5rem 1.25rem; }
+  .cta-band { padding: 3.5rem 1.25rem; }
+  .cta-band h2 { font-size: 28px; }
+  footer { padding: 2.5rem 1.25rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a class="logo" href="https://notallorder.com/">
+    <span class="logo-word">No&nbsp;Tall&nbsp;Order</span>
+    <span class="logo-sep">/</span>
+    <span class="logo-sub">projects</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://notallorder.com/services/">Services</a></li>
+    <li><a href="https://notallorder.com/who-i-help/">Who I help</a></li>
+    <li><a href="https://notallorder.com/my-story/">My story</a></li>
+    <li><a href="https://projects.notallorder.com/" class="active">Projects</a></li>
+  </ul>
+  <a href="https://notallorder.com/contact/" class="nav-cta">Book a free call</a>
+</nav>
+
+<!-- Header -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="eyebrow"><span class="eyebrow-dot"></span>Selected work</div>
+    <h1>Projects &amp; <em>client work.</em></h1>
+    <p class="sub">Tools I've built to solve real problems — and the consulting engagements they've powered.</p>
+  </div>
+</div>
+
+<!-- Internal projects -->
+<div class="section">
+  <div class="eyebrow"><span class="eyebrow-dot"></span>Things I've built</div>
+  <h2 class="section-heading">Internal projects</h2>
+  <p class="section-lead">Small, focused tools — built for clients, for this business, and for the practice of doing the work well.</p>
+
+  <div class="project-grid">
+
+    <div class="project-card fx-pre">
+      <div class="project-top">
+        <div class="project-title"><a href="https://digital-ecology.notallorder.com/">Digital Ecology</a></div>
+        <span class="project-badge project-badge--live">Live</span>
+      </div>
+      <p class="project-desc">A guided practice for intentional technology use. Users clarify what they value, audit their digital habits, and leave with a written personal philosophy — backed by an AI companion for the moments when the pull of a screen gets hard.</p>
+      <div class="project-stack">
+        <span class="stack-chip">Cloudflare Workers</span>
+        <span class="stack-chip">KV</span>
+        <span class="stack-chip">Streaming AI chat</span>
+      </div>
+      <div class="project-links">
+        <a href="https://digital-ecology.notallorder.com/">Live site <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <div class="project-card fx-pre">
+      <div class="project-top">
+        <div class="project-title"><a href="https://homepage.notallorder.com/">Home Page Copy Builder</a></div>
+        <span class="project-badge project-badge--live">Live</span>
+      </div>
+      <p class="project-desc">A decision-by-decision home page rewrite for B2B business owners. Answers assemble into an editable stack of copy boxes, each seeded with draft copy and proven formulas — the lead-gen engine for No Tall Order.</p>
+      <div class="project-stack">
+        <span class="stack-chip">React 19</span>
+        <span class="stack-chip">Vite + TS</span>
+        <span class="stack-chip">Hono + D1</span>
+      </div>
+      <div class="project-links">
+        <a href="https://homepage.notallorder.com/">Live site <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <div class="project-card fx-pre">
+      <div class="project-top">
+        <div class="project-title"><a href="https://strategic-review.pages.dev/">Messaging Diagnostic Toolkit</a></div>
+        <span class="project-badge project-badge--live">Live</span>
+      </div>
+      <p class="project-desc">The platform behind my messaging audits. Scores a company's messaging across 18 dimensions against buyer personas and a competitor, then generates strengths, gaps, and a prioritized 0–90 day action plan.</p>
+      <div class="project-stack">
+        <span class="stack-chip">Cloudflare Pages</span>
+        <span class="stack-chip">D1</span>
+        <span class="stack-chip">AI-assisted scoring</span>
+      </div>
+      <div class="project-links">
+        <a href="https://strategic-review.pages.dev/">Live site <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <div class="project-card fx-pre">
+      <div class="project-top">
+        <div class="project-title">BuzzBeacon Personas</div>
+        <span class="project-badge">Client tool</span>
+      </div>
+      <p class="project-desc">An interactive showcase of buyer personas for Aculeo Technologies' marketing audit — a living artifact of the research behind the strategy, built so the team can keep returning to who they're writing for.</p>
+      <div class="project-stack">
+        <span class="stack-chip">Cloudflare Workers</span>
+        <span class="stack-chip">Persona research</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/67tallchris/buzzbeacon-personas">View repo <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <div class="project-card fx-pre">
+      <div class="project-top">
+        <div class="project-title"><a href="https://flowcraft-website.portercoaching.workers.dev/">Flowcraft</a></div>
+        <span class="project-badge project-badge--live">Live</span>
+      </div>
+      <p class="project-desc">Website for Flowcraft's ADHD coaching platform — from program structure to a content-managed admin for the coaching team, built to grow with the business.</p>
+      <div class="project-stack">
+        <span class="stack-chip">Cloudflare Workers</span>
+        <span class="stack-chip">CMS admin</span>
+      </div>
+      <div class="project-links">
+        <a href="https://flowcraft-website.portercoaching.workers.dev/">Live site <span class="arr">→</span></a>
+      </div>
+    </div>
+
+    <div class="project-card fx-pre">
+      <div class="project-top">
+        <div class="project-title"><a href="https://github.com/67tallchris/adhd-coach">ADHD Coach</a></div>
+        <span class="project-badge">Personal</span>
+      </div>
+      <p class="project-desc">A personal coaching app: brain dump, habit tracking, pomodoro focus sessions, goals, and gentle AI nudges — designed low-friction for ADHD brains, shame-free by default.</p>
+      <div class="project-stack">
+        <span class="stack-chip">Web app</span>
+        <span class="stack-chip">Habits + focus tools</span>
+        <span class="stack-chip">AI nudges</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/67tallchris/adhd-coach">View repo <span class="arr">→</span></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Client work -->
+<div class="section" style="padding-top: 0;">
+  <div class="eyebrow"><span class="eyebrow-dot"></span>Client engagements</div>
+  <h2 class="section-heading">Consulting work</h2>
+  <p class="section-lead">Where the tools above meet real businesses — and real next customers.</p>
+
+  <div class="client-grid">
+
+    <div class="client-card fx-pre">
+      <div class="client-name">Roloff Consulting</div>
+      <p class="client-desc">A B2B messaging audit: competitive scorecard across all 18 dimensions, persona-grounded analysis of strengths and gaps, and a prioritized 0–90 day action plan for the messaging.</p>
+      <div class="client-deliverable">
+        <span class="project-badge">Delivered</span>
+        <span>&nbsp;· Messaging audit via the Diagnostic Toolkit</span>
+      </div>
+    </div>
+
+    <div class="client-card fx-pre">
+      <div class="client-name">Aculeo Technologies</div>
+      <p class="client-desc">Buyer persona research distilled into an interactive showcase the team can use daily, aligning the website with real buyers. Website copywriting is under way — a full rewrite grounded in the persona work.</p>
+      <div class="client-deliverable">
+        <span class="project-badge project-badge--wip">In progress</span>
+        <span>&nbsp;· Personas delivered · Copywriting in progress</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CTA band -->
+<div class="cta-band">
+  <h2>Have a project in mind?</h2>
+  <p>Whether it's a messaging audit, a piece of software, or a website that finally sounds like you.</p>
+  <a href="https://notallorder.com/contact/" class="btn-p">Book a free call</a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo-word">No&nbsp;Tall&nbsp;Order</div>
+      <p class="footer-tagline">Senior marketing strategy for established businesses ready to find their next customer.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="https://notallorder.com/services/">Services</a></li>
+      <li><a href="https://notallorder.com/who-i-help/">Who I help</a></li>
+      <li><a href="https://notallorder.com/how-it-works/">How it works</a></li>
+      <li><a href="https://notallorder.com/my-story/">My story</a></li>
+      <li><a href="https://projects.notallorder.com/">Projects</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 No Tall Order. All rights reserved.</span>
+    <a class="footer-cta-link" href="https://notallorder.com/contact/">Book a free call <span>→</span></a>
+  </div>
+</footer>
+
+<script>
+// Scroll-reveal (matches main site behavior)
+const reveal = () => {
+  const els = document.querySelectorAll('.fx-pre');
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.remove('fx-pre');
+        e.target.classList.add('fx-in');
+        io.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.08 });
+  els.forEach((el, i) => { el.style.setProperty('--fx-delay', Math.min(i % 4, 3) * 70 + 'ms'); io.observe(el); });
+};
+document.addEventListener('DOMContentLoaded', reveal);
+</script>
+
+</body>
+</html>

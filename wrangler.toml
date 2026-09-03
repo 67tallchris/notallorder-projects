@@ -1,0 +1,16 @@
+name = "notallorder-projects"
+main = "src/worker.js"
+compatibility_date = "2025-03-01"
+
+# Custom domain — primary URL (auto-creates DNS + cert like digital-minimalism).
+# The workers.dev subdomain is auto-disabled when a custom domain is attached.
+routes = [
+  { pattern = "projects.notallorder.com", custom_domain = true },
+]
+
+# Static assets — the whole site lives in ./public.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# No Access apps on this hostname — public showcase by design.
